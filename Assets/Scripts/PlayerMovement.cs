@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && stunTimer <= 0)
         {
             activeSpeed = dashSpeed;
             dashCounter = dashLength;
