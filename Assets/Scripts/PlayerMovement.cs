@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //Walking variables
     public Rigidbody2D rB2D;
     public float movementSpeed;
     private Vector2 moveInput;
-    private float activeSpeed;
+    public float activeSpeed;
 
+    //Dashing variables
     public float dashSpeed;
+    public float dashTime;
     private float dashLength = 0.5f;
-    public float dashCounter;
+    public float dashTimer;
+    public int dashCounter;
+    private int dashCounterMax = 3;
 
+    //Stun variables
     public float stunTimer;
     public float stunLength;
     private float stunSpeed = 0.0f;
@@ -21,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Initialize movement and dashing values
         activeSpeed = movementSpeed;
+        dashCounter = dashCounterMax;
     }
 
     // Update is called once per frame
@@ -32,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         Dash();
     }
 
+    //Stun code
     public void Stun()
     {
         if (stunCheck)
@@ -49,9 +58,9 @@ public class PlayerMovement : MonoBehaviour
                 activeSpeed = movementSpeed;
             }
         }
-        
     }
 
+    //Movement code
     public void Movement() 
     {
         moveInput.x = Input.GetAxis("Horizontal");
@@ -62,24 +71,47 @@ public class PlayerMovement : MonoBehaviour
         rB2D.velocity = moveInput * activeSpeed;
     }
 
+    //Dashing code
     public void Dash()
     {
+        //Add dashes for the player
+        if (dashCounter < dashCounterMax) 
+        {
+            dashTimer += Time.deltaTime;
+            if(dashTimer >= 1) 
+            {
+                dashCounter += 1;
+                dashTimer = 0;
+            }
+        }
+
+        //Code for dashing on button press
         if (Input.GetKeyDown(KeyCode.Space) && stunTimer <= 0)
         {
             activeSpeed = dashSpeed;
-            dashCounter = dashLength;
+            dashTime = dashLength;
+            dashCounter -= 1;
+            //code for stunning player when they dash too much
+            if (dashCounter <= 0)
+            {
+                stunCheck = true;
+                dashCounter = dashCounterMax;
+                dashTimer = 0;
+            }
         }
 
-        if (dashCounter > 0)
+        //Code for changing speed of the player
+        if (dashTime > 0)
         {
-            dashCounter -= Time.deltaTime;
+            dashTime -= Time.deltaTime;
 
-            if (dashCounter <= 0)
+            if (dashTime <= 0 && stunTimer <= 0)
             {
                 activeSpeed = movementSpeed;
             }
         }
     }
+    //collision check for stun
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Stun")
