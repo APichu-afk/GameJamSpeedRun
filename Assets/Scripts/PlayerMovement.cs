@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject Rat;
+    public Animator ratMoveAnim;
     //Walking variables
     public Rigidbody2D rB2D;
     public float movementSpeed;
@@ -53,9 +55,12 @@ public class PlayerMovement : MonoBehaviour
         if(stunTimer > 0)
         {
             stunTimer -= Time.deltaTime;
+            
             if (stunTimer <= 0)
             {
                 activeSpeed = movementSpeed;
+                ratMoveAnim.SetBool("Dizzy", false);
+                ratMoveAnim.SetBool("Dashing", false);
             }
         }
     }
@@ -63,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
     //Movement code
     public void Movement() 
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Rat.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Rat.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
         moveInput.x = Input.GetAxis("Horizontal");
         moveInput.y = Input.GetAxis("Vertical");
 
@@ -88,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         //Code for dashing on button press
         if (Input.GetKeyDown(KeyCode.Space) && stunTimer <= 0)
         {
+            ratMoveAnim.SetBool("Dashing", true);
             activeSpeed = dashSpeed;
             dashTime = dashLength;
             dashCounter -= 1;
@@ -95,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
             if (dashCounter <= 0)
             {
                 stunCheck = true;
+                ratMoveAnim.SetBool("Dizzy", true);
                 dashCounter = dashCounterMax;
                 dashTimer = 0;
             }
@@ -104,10 +119,12 @@ public class PlayerMovement : MonoBehaviour
         if (dashTime > 0)
         {
             dashTime -= Time.deltaTime;
+            
 
             if (dashTime <= 0 && stunTimer <= 0)
             {
                 activeSpeed = movementSpeed;
+                ratMoveAnim.SetBool("Dashing", false);
             }
         }
     }
@@ -117,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Stun")
         {
             stunCheck = true;
+            ratMoveAnim.SetBool("Dizzy", true);
         }
     }
 }
