@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject Rat;
+    public Animator ratMoveAnim;
     //Walking variables
     public Rigidbody2D rB2D;
     public float movementSpeed;
@@ -63,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
     //Movement code
     public void Movement() 
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Rat.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Rat.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
         moveInput.x = Input.GetAxis("Horizontal");
         moveInput.y = Input.GetAxis("Vertical");
 
@@ -104,10 +114,12 @@ public class PlayerMovement : MonoBehaviour
         if (dashTime > 0)
         {
             dashTime -= Time.deltaTime;
+            ratMoveAnim.SetBool("Dashing", true);
 
             if (dashTime <= 0 && stunTimer <= 0)
             {
                 activeSpeed = movementSpeed;
+                ratMoveAnim.SetBool("Dashing", false);
             }
         }
     }
