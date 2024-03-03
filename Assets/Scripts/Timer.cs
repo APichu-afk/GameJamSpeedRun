@@ -24,6 +24,9 @@ public class Timer : MonoBehaviour
     {
         currentTime = countDown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime;
 
+        timerText.color = Color.green;
+        minuteText.color = Color.green;
+
         if (currentTime >= 60)
         {
             currentTime = 0;
