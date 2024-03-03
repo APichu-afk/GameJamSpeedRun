@@ -26,12 +26,6 @@ public class PlayerMovement : MonoBehaviour
     private float stunSpeed = 0.0f;
     private bool stunCheck = false;
     public float stunDestroy = 0.5f;
-
-    //SFX variables
-    public AudioSource src1, src2;
-    public AudioClip sfx1, sfx2, sfx3;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -107,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         //Code for dashing on button press
         if (Input.GetKeyDown(KeyCode.Space) && stunTimer <= 0)
         {
-            src1.PlayOneShot(sfx1);
             ratMoveAnim.SetBool("Dashing", true);
             activeSpeed = dashSpeed;
             dashTime = dashLength;
@@ -119,7 +112,6 @@ public class PlayerMovement : MonoBehaviour
                 ratMoveAnim.SetBool("Dizzy", true);
                 dashCounter = dashCounterMax;
                 dashTimer = 0;
-                src2.PlayOneShot(sfx2);
             }
         }
 
@@ -141,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Stun")
         {
-            src2.PlayOneShot(sfx2);
             stunCheck = true;
             ratMoveAnim.SetBool("Dizzy", true);
         }
