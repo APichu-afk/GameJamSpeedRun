@@ -26,6 +26,11 @@ public class StartMenu : MonoBehaviour
         //Show highscores;
         SceneManager.LoadScene("HighScores");
     }
+    public void BackButton()
+    {
+        //Show highscores;
+        SceneManager.LoadScene("StartScene");
+    }
 
     public void ExitButton()
     {
