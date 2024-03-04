@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource src1, src2;
     public AudioClip sfx1, sfx2, sfx3;
 
+    //Pause
+    public GameObject pauseMenu;
+
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Movement code
-    public void Movement() 
+    public void Movement()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {

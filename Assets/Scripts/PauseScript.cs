@@ -1,19 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public GameObject Player;
-    public float resetPosX;
-    public float resetPosY;
-    // Start is called before the first frame update
-    void Start()
-    {
-        resetPosX = Player.transform.position.x;
-        resetPosY = Player.transform.position.y;
-    }
 
     // Update is called once per frame
     void Update()
@@ -23,17 +15,20 @@ public class PauseScript : MonoBehaviour
             if (pauseMenu.activeSelf == false)
             {
                 pauseMenu.SetActive(true);
+                Time.timeScale = 0.0f;
             }
             else
             {
                 pauseMenu.SetActive(false);
+                Time.timeScale = 1.0f;
             }
         }
     }
 
     public void Reset()
     {
-        Player.transform.position = new Vector2(resetPosX, resetPosY);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("SampleScene");
         pauseMenu.SetActive(false);
     }
 }
