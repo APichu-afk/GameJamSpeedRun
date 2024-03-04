@@ -12,20 +12,23 @@ public class Timer : MonoBehaviour
     public bool countDown;
     public float minute;
 
+    public bool stopped = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currentTime = countDown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime;
-
         timerText.color = Color.green;
         minuteText.color = Color.green;
+    }
+
+
+    void Update()
+    {
+        if (stopped == false)
+        {
+            currentTime = countDown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime;
+        }
+
+
 
         if (currentTime >= 60)
         {
@@ -41,5 +44,15 @@ public class Timer : MonoBehaviour
     {
         timerText.text = currentTime.ToString("00.000");
         minuteText.text = minute.ToString("0:");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            stopped = true;
+            timerText.color = Color.red;
+            minuteText.color = Color.red;
+        }
     }
 }
