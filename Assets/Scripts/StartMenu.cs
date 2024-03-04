@@ -25,6 +25,7 @@ public class StartMenu : MonoBehaviour
     {
         //Show highscores;
         SceneManager.LoadScene("HighScores");
+        Timer.playerScore = null;
     }
     public void BackButton()
     {
