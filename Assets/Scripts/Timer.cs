@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
+    public static string playerScore;
+
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI minuteText;
 
@@ -51,7 +53,7 @@ public class Timer : MonoBehaviour
             stopped = true;
             timerText.color = Color.red;
             minuteText.color = Color.red;
-            
+            playerScore = minuteText.text + timerText.text;
             SceneManager.LoadScene("Final");
         }
     }
