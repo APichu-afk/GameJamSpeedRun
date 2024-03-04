@@ -48945,6 +48945,7 @@ GameObject:
   - component: {fileID: 1010120622}
   - component: {fileID: 1010120624}
   - component: {fileID: 1010120625}
+  - component: {fileID: 1010120626}
   m_Layer: 0
   m_Name: TempPlayer
   m_TagString: Player
@@ -49057,8 +49058,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.083991155, y: -0.031195605}
-  m_Size: {x: 0.5584474, y: 0.18888626}
+  m_Offset: {x: 0.022763608, y: -0.0356436}
+  m_Size: {x: 0.34198025, y: 0.19778818}
   m_Direction: 1
 --- !u!82 &1010120624
 AudioSource:
@@ -49252,6 +49253,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &1010120626
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010120617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.24225196, y: -0.04128287}
+  m_Size: {x: 0.20869389, y: 0.082889654}
+  m_Direction: 1
 --- !u!1 &1012754035
 GameObject:
   m_ObjectHideFlags: 0
