@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -13,14 +14,11 @@ public class Timer : MonoBehaviour
     public float minute;
 
     public bool stopped = false;
-
     private void Start()
     {
         timerText.color = Color.green;
         minuteText.color = Color.green;
     }
-
-
     void Update()
     {
         if (stopped == false)
@@ -46,13 +44,15 @@ public class Timer : MonoBehaviour
         minuteText.text = minute.ToString("0:");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             stopped = true;
             timerText.color = Color.red;
             minuteText.color = Color.red;
+            
+            SceneManager.LoadScene("Final");
         }
     }
 }
